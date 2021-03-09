@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import { makeAutoObservable } from "mobx"
+
+class Timer {
+  match = {}
+
+  constructor() {
+    makeAutoObservable(this)
+  }
+
+  async getList() {
+    let url = 'https://full-stats-start.herokuapp.com/api/v1/basketball/match/1';
+    let response = await fetch(url);
+
+    console.log(response)
+    this.match = response;
+  }
+}
+
+const myTimer = new Timer()
+myTimer.getList();
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      Hello
     </div>
   );
 }
